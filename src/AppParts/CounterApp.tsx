@@ -1,35 +1,23 @@
 import React from "react";
 import {CounterScreen} from "../Screens/CounterScreen";
 import {ButtonsCounter} from "../Buttons/ButtonsCounter";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../state/store";
 
-type CounterAppType = {
-    counter: number
-    counterStart: number
-    counterMax: number
-    inputValueStart: number
-    inputValueMax: number
-    onClickInc: () => void
-    onClickReset: () => void
-    onClickSetCounter: () => void
-}
+export function CounterApp() {
 
-export function CounterApp(props: CounterAppType) {
+    let counter = useSelector<AppRootStateType, number>(state => state.counter.currentValue);
+    let counterMax = useSelector<AppRootStateType, number>(state => state.counter.maxValue);
 
     return (
         <div className="App-Counter">
             <CounterScreen
-                counter={props.counter}
-                counterMaxValue={props.counterMax}
+                counter={counter}
+                counterMaxValue={counterMax}
             />
             <ButtonsCounter
-                counter={props.counter}
-                OnClickInc={props.onClickInc}
-                OnClickReset={props.onClickReset}
-                OnClickSetCounter={props.onClickSetCounter}
-                counterMinValue={props.counterStart}
-                counterMaxValue={props.counterMax}
-                inputStartValue={props.inputValueStart}
-                inputMaxValue={props.inputValueMax}
+                counter={counter}
+                counterMaxValue={counterMax}
             />
         </div>
     )

@@ -1,31 +1,23 @@
 import React from "react";
 import {SetMenuScreen} from "../Screens/SetMenuScreen";
 import {ButtonsMenu} from "../Buttons/ButtonsMenu";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../state/store";
 
-type MenuAppType = {
-    inputValueStart: number
-    inputValueMax: number
-    editMode: boolean
-    changeInputStartValue: (startValue: number) => void
-    changeInputMaxValue: (maxValue: number) => void
-    onClickSetMenu: () => void
-}
+export function MenuApp() {
 
-export function MenuApp(props: MenuAppType) {
+    let inputValueStart = useSelector<AppRootStateType, number>(state => state.counter.inputStartValue);
+    let inputValueMax = useSelector<AppRootStateType, number>(state => state.counter.inputMaxValue);
 
     return (
         <div className="Menu">
             <SetMenuScreen
-                startInputValue={props.inputValueStart}
-                maxInputValue={props.inputValueMax}
-                changeStartValue={props.changeInputStartValue}
-                changeMaxValue={props.changeInputMaxValue}
+                startInputValue={inputValueStart}
+                maxInputValue={inputValueMax}
             />
             <ButtonsMenu
-                OnClickSet={props.onClickSetMenu}
-                editMode={props.editMode}
-                counterStartValue={props.inputValueStart}
-                counterMaxValue={props.inputValueMax}
+                counterStartValue={inputValueStart}
+                counterMaxValue={inputValueMax}
             />
         </div>
     )
